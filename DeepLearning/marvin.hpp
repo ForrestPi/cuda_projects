@@ -1,7 +1,8 @@
 /*
  * ----------------------------------------------------------------------------
- * Marvin: A Minimalist GPU-only N-Dimensional ConvNets Framework
- * Copyright (C) 2015 Princeton Vision Group
+ * A Minimalist GPU-only N-Dimensional ConvNets Framework
+ * Write By ForrestPi
+ * warp cudnn cublas cudart and curand
  * ----------------------------------------------------------------------------
  */
 
@@ -5178,8 +5179,7 @@ public:
                 break;
                 case DivisiveNormalization:
 #ifdef CUDNN_DivisiveNormalization
-                // What is the Best Multi-Stage Architecture for Object Recognition?
-                // http://yann.lecun.com/exdb/publis/pdf/jarrett-iccv-09.pdf
+                
                     std::cout<<"Not implemented yet"<<std::endl;
                     FatalError(__LINE__);
                     checkCUDNN(__LINE__,cudnnDivisiveNormalizationForward(cudnnHandle, desc, CUDNN_DIVNORM_PRECOMPUTED_MEANS,
@@ -5890,7 +5890,7 @@ public:
 
 
     void backward(Phase phase_){
-        // either write this in Cuda or get both the prediction and ground truth to CPU and do the computation and write the diff back to GPU
+        
         if (in[0]->need_diff){
             switch(mode){
                 case MultinomialLogistic_StableSoftmax:
@@ -5953,11 +5953,7 @@ public:
 
 
 /* ----------------------------------------------------------------------------
- * The following LSTM implementation are largely based on LRCN on Caffe.
- *
- * Project page: http://jeffdonahue.com/lrcn/
- * GitHub page:  https://github.com/LisaAnne/lisa-caffe-public
- * License page: https://github.com/BVLC/caffe/blob/master/LICENSE
+ * The following LSTM implementation are largely based on LRCN on Caffe.(copy on caffe)
  * ----------------------------------------------------------------------------
  */
 
@@ -7745,8 +7741,8 @@ public:
             case LR_sigmoid:
                 rate = base_lr * (ComputeT(1) /  (ComputeT(1) + exp(-lr_gamma * (ComputeT(iter) - ComputeT(lr_stepsize)))));
                 break;
-            case LR_cyclical: // from http://arxiv.org/abs/1506.01186
-                rate = 0; // TODO: place holder for now
+            case LR_cyclical: 
+                rate = 0; 
                 break;
         }
         return rate;
